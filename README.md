@@ -5,6 +5,10 @@ thread using class [AsyncTask](https://developer.android.com/reference/android/o
 
 <br>
 
+This app is a variation of the app [Langlaufende Operationen](https://github.com/MDecker-MobileComputing/Android_LanglaufendeOperationen).
+
+<br>
+
 Identifiers (names for classes, variables and methods), (JavaDoc) comments and UI texts are in German only.
 
 <br>
@@ -12,7 +16,13 @@ Identifiers (names for classes, variables and methods), (JavaDoc) comments and U
 ----
 ## Screenshots
 
-![Screenshot 1](screenshot_1.png)  ![Screenshot 2](screenshot_2.png) 
+![Screenshot 1: Vor der Berechnung](screenshot_1.png)  
+
+![Screenshot 2: Während der Berechnung](screenshot_2.png) 
+
+<br>
+
+![Screenshot 3: Berechnung beendet](screenshot_3.png)
 
 <br>
 

@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -34,20 +35,24 @@ public class MainActivity extends Activity implements OnClickListener {
     /** Button um Berechnung zu starten. */
     protected Button _startButton = null;
 
+    /** Element für prozentuale Fortschrittsanzeige (von 0% bis 100%). */
+    protected ProgressBar _progressBar = null;
+
 
     /**
      * Lifecycle-Method für Setup der UI.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         setTitle(R.string.title_activity);
 
         _editTextInputParameter = findViewById( R.id.textEditFuerInputParameter );
         _textViewAnzeige        = findViewById( R.id.textViewZumAnzeigen        );
         _startButton            = findViewById( R.id.buttonBerechnungStarten    );
+        _progressBar            = findViewById( R.id.fortschrittsanzeige        );
 
         _startButton.setOnClickListener(this);
     }
@@ -70,6 +75,7 @@ public class MainActivity extends Activity implements OnClickListener {
         }
 
         keyboardEinklappen(_editTextInputParameter);
+        _progressBar.setProgress(0);
 
         int inputZahl = Integer.parseInt(inputString);
         Log.d(TAG4LOGGING,
@@ -110,24 +116,23 @@ public class MainActivity extends Activity implements OnClickListener {
      *                 wird als Parameter bei Aufruf der <i>execute()</i>-Methode am
      *                 <i>AsyncTask</i>-Objekt übergeben.</li><br>
      *
-     *     <li>String: Als Fortschrittsanzeige darzustellender String, Input-Parameter
-     *                 für die Methode <i>onProgressUpdate()</i>, wird durch Aufruf
-     *                 von Methode <i>publishProgress()</i> in <i>doInBackground()</i>
-     *                 übergeben.</li><br>
+     *     <li>Integer: Als Fortschrittsanzeige darzustellender Prozent-Wert, wird durch
+     *                  Aufruf der Methode <i>publishProgress()</i> "verschickt" und von
+     *                  der Methode <i>onProgressUpdate</i> empfangen.
      *
      *     <li>String: Als Ergebnis darzustellende Nachricht; wird mit <i>return</i>
      *                 von der Methode <i>doInBackground()</i> zurückgegeben,
      *                 ist Input-Parameter für die Methode <i>onPostExecute()</i>.</li><br>
      * </ol>
      */
-    public class MeinAsyncTask extends AsyncTask<Integer, String, String> {
+    public class MeinAsyncTask extends AsyncTask<Integer, Integer, String> {
 
         /**
          * Methode enthält Code mit langer Berechnung, der im Hintergrund-
          * Thread ausgeführt wird.
          *
-         * @param params Varags, erste Komponente muss Zahl n sein, die
-         *               potenziert werden soll.
+         * @param params Varags, erste Komponente muss Zahl <i>n</i> sein,
+         *               die potenziert werden soll.
          *
          * @return String mit Berechnungsergebnis, wird an Methode
          *         {@link MeinAsyncTask#onPostExecute(String)} übergeben.
@@ -143,12 +148,6 @@ public class MainActivity extends Activity implements OnClickListener {
 
             long zeitpunktStart = System.nanoTime();
 
-            if (mitFortschrittsanzeige)
-                publishProgress("Berechnung für " + inputZahl + " gestartet ...");
-            else
-                publishProgress("Berechnung für " + inputZahl + " gestartet ..." +
-                        "Keine Fortschritts-Anzeige" );
-
             for (int i1 = 1; i1 <= inputZahl; i1++) {
                 for (int i2 = 1; i2 <= inputZahl; i2++) {
                     for (int i3 = 1; i3 <= inputZahl; i3++) {
@@ -158,10 +157,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
                 if (mitFortschrittsanzeige  &&  i1 % 10 == 9) {
                     int prozentWert = (int) (i1 * 100.0 / inputZahl);
-                    String fortschrittStr =
-                            "Fortschritt: " + i1 + " von " + inputZahl +
-                                    "\n(" + prozentWert + " %)";
-                    publishProgress(fortschrittStr);
+                    publishProgress(prozentWert);
                 }
 
             } // for i1
@@ -171,7 +167,7 @@ public class MainActivity extends Activity implements OnClickListener {
             final long laufzeitSekunden = (zeitpunktEnde - zeitpunktStart) /
                     ( 1000 * 1000 * 1000 );
 
-            return  "Ergebnis: " + ergebnis +
+            return  "Ergebnis: "   + ergebnis +
                     "\nLaufzeit: " + laufzeitSekunden + " Sekunden";
         }
 
@@ -180,11 +176,16 @@ public class MainActivity extends Activity implements OnClickListener {
          * Methode {@link AsyncTask#publishProgress(Object[])} aufgerufen
          * (aber asynchron!).
          *
-         * @param values  String mit aktuellem Fortschritt.
+         * @param values  Varags, erste Komponente ist int-Wert mit Fortschritt in Prozent.
          */
         @Override
-        protected void onProgressUpdate(String... values) {
-            _textViewAnzeige.setText(values[0]);
+        protected void onProgressUpdate(Integer...values) {
+
+            int prozentwert = values[0];
+
+            _progressBar.setProgress( prozentwert );
+
+            _textViewAnzeige.setText( prozentwert + "%" );
         }
 
         /**
@@ -198,6 +199,7 @@ public class MainActivity extends Activity implements OnClickListener {
         protected void onPostExecute(String ergebnisString) {
             _textViewAnzeige.setText( ergebnisString );
             _startButton.setEnabled(true);
+            _progressBar.setProgress( 100 );
         }
 
     }

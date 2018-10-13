@@ -37,5 +37,17 @@
         android:layout_below="@id/buttonBerechnungStarten"
         android:text="@string/textview_dummy_content" />
 
+
+    <ProgressBar
+        android:id="@+id/fortschrittsanzeige"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewZumAnzeigen"
+        android:paddingTop="15dp"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:progress="0"
+        android:min="0"
+        android:max="100"  />
+
 </RelativeLayout>
 
