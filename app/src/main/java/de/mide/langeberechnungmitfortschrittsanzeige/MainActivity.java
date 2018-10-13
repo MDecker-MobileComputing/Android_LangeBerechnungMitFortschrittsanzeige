@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -61,12 +62,14 @@ public class MainActivity extends Activity implements OnClickListener {
     @Override
     public void onClick(View view) {
 
-        /* *** Zuerst wird überprüft, ob zulässige Zahl eingegeben *** */
+        // Zuerst wird überprüft, ob zulässige Zahl eingegeben
         String inputString = _editTextInputParameter.getText().toString();
         if (inputString == null || inputString.trim().length() == 0) {
             _textViewAnzeige.setText("Bitte Zahl in das Textfeld eingeben!");
             return;
         }
+
+        keyboardEinklappen(_editTextInputParameter);
 
         int inputZahl = Integer.parseInt(inputString);
         Log.d(TAG4LOGGING,
@@ -76,6 +79,23 @@ public class MainActivity extends Activity implements OnClickListener {
         /* *** Eigentliche Berechnung durchführen *** */
         MeinAsyncTask mat = new MeinAsyncTask();
         mat.execute(inputZahl);
+    }
+
+
+    /**
+     * Virtuelles Keyboard wieder "einklappen".
+     * Lösung nach
+     * <a href="https://stackoverflow.com/a/17789187/1364368">https://stackoverflow.com/a/17789187/1364368</a>
+     *
+     * @param view UI-Element, von dem Keyboard eingeblendet wurde.
+     */
+    public void keyboardEinklappen(View view) {
+
+        InputMethodManager imm = null;
+
+        imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 
