@@ -38,6 +38,7 @@
         android:text="@string/textview_dummy_content" />
 
 
+    <!-- Zur Ausgabe Prozent-Wert -->
     <ProgressBar
         android:id="@+id/fortschrittsanzeige"
         android:layout_width="match_parent"

@@ -59,13 +59,20 @@ public class MainActivity extends Activity implements OnClickListener {
 
 
     /**
-     * Einzige Methode aus Interface OnClickListener.
-     * Event-Handler für alle drei Buttons!
+     * Event-Handler-Methode für den Button. Started die Berechnung (wenn Zahl eingegeben).
+     * Bevor die Berechnung gestartet wird, wird aber noch das Keyboard eingeklappt
+     * und die Fortschritts-Anzeige (ProgressBar) auf "0%" gesetzt.
      *
      * @parameter view  Button, der Event ausgelöst hat.
      */
     @Override
     public void onClick(View view) {
+
+        if (view != _startButton) {
+            _textViewAnzeige.setText("Interner Fehler.");
+            Log.e(TAG4LOGGING, "Event-Handler-Methode wurde von unerwartetem Button-Objekt aufgerufen.");
+            return;
+        }
 
         // Zuerst wird überprüft, ob zulässige Zahl eingegeben
         String inputString = _editTextInputParameter.getText().toString();
@@ -172,8 +179,8 @@ public class MainActivity extends Activity implements OnClickListener {
         }
 
         /**
-         * Aktualisiert die Fortschrittsanzeige; wird durch die
-         * Methode {@link AsyncTask#publishProgress(Object[])} aufgerufen
+         * Aktualisiert die Fortschrittsanzeige (Text und ProessBar); wird durch
+         * die Methode {@link AsyncTask#publishProgress(Object[])} aufgerufen
          * (aber asynchron!).
          *
          * @param values  Varags, erste Komponente ist int-Wert mit Fortschritt in Prozent.
@@ -198,8 +205,8 @@ public class MainActivity extends Activity implements OnClickListener {
         @Override
         protected void onPostExecute(String ergebnisString) {
             _textViewAnzeige.setText( ergebnisString );
-            _startButton.setEnabled(true);
-            _progressBar.setProgress( 100 );
+            _startButton.setEnabled( true );
+            _progressBar.setProgress( 100 ); // 100%
         }
 
     }
