@@ -122,11 +122,22 @@ public class MainActivity extends Activity implements OnClickListener {
      */
     public class MeinAsyncTask extends AsyncTask<Integer, String, String> {
 
+        /**
+         * Methode enthält Code mit langer Berechnung, der im Hintergrund-
+         * Thread ausgeführt wird.
+         *
+         * @param params Varags, erste Komponente muss Zahl n sein, die
+         *               potenziert werden soll.
+         *
+         * @return String mit Berechnungsergebnis, wird an Methode
+         *         {@link MeinAsyncTask#onPostExecute(String)} übergeben.
+         */
         @Override
         protected String doInBackground(Integer... params) {
-            long ergebnis  = 0;
+            long    ergebnis               = 0;
             boolean mitFortschrittsanzeige = true;
-            int  inputZahl = params[0];
+
+            int inputZahl = params[0];
 
             if (inputZahl < 250) { mitFortschrittsanzeige = false; }
 
@@ -164,11 +175,25 @@ public class MainActivity extends Activity implements OnClickListener {
                     "\nLaufzeit: " + laufzeitSekunden + " Sekunden";
         }
 
+        /**
+         * Aktualisiert die Fortschrittsanzeige; wird durch die
+         * Methode {@link AsyncTask#publishProgress(Object[])} aufgerufen
+         * (aber asynchron!).
+         *
+         * @param values  String mit aktuellem Fortschritt.
+         */
         @Override
         protected void onProgressUpdate(String... values) {
             _textViewAnzeige.setText(values[0]);
         }
 
+        /**
+         * Methode wird nach Ende der Berechnung aufgerufen
+         * (also wenn Methode {@link MeinAsyncTask#doInBackground(Integer...)}  }
+         *  beendet ist) und stellt das Berechnungsergebnis auf der UI dar.
+         *
+         * @param ergebnisString  Berechnungsergebnis, wird auf UI dargestellt.
+         */
         @Override
         protected void onPostExecute(String ergebnisString) {
             _textViewAnzeige.setText( ergebnisString );
