@@ -1,0 +1,41 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    tools:context=".MainActivity" >
+
+
+    <EditText
+        android:id="@+id/textEditFuerInputParameter"
+        android:layout_width = "match_parent"
+        android:layout_height= "wrap_content"
+        android:inputType="number"
+        android:textSize="20sp"
+        android:hint="@string/input_parameter_label"  />
+
+    <Button
+        android:id="@+id/buttonBerechnungStarten"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textEditFuerInputParameter"
+        android:textSize="20sp"
+        android:paddingTop="25dp"
+        android:paddingBottom="30dp"
+        android:text="@string/label_start_button"  />
+
+    <TextView
+        android:id="@+id/textViewZumAnzeigen"
+        android:background="#fff0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/buttonBerechnungStarten"
+        android:text="@string/textview_dummy_content" />
+
+</RelativeLayout>
+

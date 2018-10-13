@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Fortschrittsanzeige</string>
+
+    <string name="title_activity">Lange Berechnung mit Fortschrittsanzeige</string>
+
+    <string name="input_parameter_label">Hier Zahl <i>n</i> eingeben</string>
+    <string name="label_start_button">Berechnung <i>n<sup>3</sup></i> starten\n(mit Fortschrittsanzeige)</string>
+    <string name="textview_dummy_content">\n\n</string>
+
+</resources>
