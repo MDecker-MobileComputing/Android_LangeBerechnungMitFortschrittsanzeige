@@ -54,7 +54,7 @@ public class MainActivity extends Activity implements OnClickListener {
         _startButton            = findViewById( R.id.buttonBerechnungStarten    );
         _progressBar            = findViewById( R.id.fortschrittsanzeige        );
 
-        _startButton.setOnClickListener(this);
+        _startButton.setOnClickListener( this );
     }
 
 
@@ -98,9 +98,9 @@ public class MainActivity extends Activity implements OnClickListener {
     /**
      * Virtuelles Keyboard wieder "einklappen".
      * Lösung nach
-     * <a href="https://stackoverflow.com/a/17789187/1364368">https://stackoverflow.com/a/17789187/1364368</a>
+     * <a href="https://stackoverflow.com/a/17789187/1364368">https://stackoverflow.com/a/17789187/1364368</a>.
      *
-     * @param view UI-Element, von dem Keyboard eingeblendet wurde.
+     * @param view  UI-Element, von dem das Keyboard eingeblendet wurde.
      */
     public void keyboardEinklappen(View view) {
 
@@ -117,17 +117,25 @@ public class MainActivity extends Activity implements OnClickListener {
     /* **************************** */
 
     /**
+     * Eigenes Unterklasse der Android-spezifischen Klasse {@link AsyncTask}.
+     * Die Berechnung wird nach Instanziierung dieser Klasse durch den
+     * Aufruf der Methode <code>execute</code> gestartet.
+     * <br><br>
+     *
      * Generics Parameter:
      * <ol>
-     *     <li>Integer: Eingabe-Parameter <i>n</i> für Methode <i>doInBackground()</i>,
+     *     <li><code>Integer</code>: 
+     *                 Eingabe-Parameter <i>n</i> für Methode <i>doInBackground()</i>,
      *                 wird als Parameter bei Aufruf der <i>execute()</i>-Methode am
      *                 <i>AsyncTask</i>-Objekt übergeben.</li><br>
      *
-     *     <li>Integer: Als Fortschrittsanzeige darzustellender Prozent-Wert, wird durch
+     *     <li><code>Integer</code>: 
+     *                  Als Fortschrittsanzeige darzustellender Prozent-Wert, wird durch
      *                  Aufruf der Methode <i>publishProgress()</i> "verschickt" und von
      *                  der Methode <i>onProgressUpdate</i> empfangen.
      *
-     *     <li>String: Als Ergebnis darzustellende Nachricht; wird mit <i>return</i>
+     *     <li><code>String</code>: 
+     *                 Als Ergebnis darzustellende Nachricht; wird mit <i>return</i>
      *                 von der Methode <i>doInBackground()</i> zurückgegeben,
      *                 ist Input-Parameter für die Methode <i>onPostExecute()</i>.</li><br>
      * </ol>
@@ -136,16 +144,16 @@ public class MainActivity extends Activity implements OnClickListener {
 
         /**
          * Methode enthält Code mit langer Berechnung, der im Hintergrund-
-         * Thread ausgeführt wird.
+         * Thread (Worker-Thread) ausgeführt wird.
          *
-         * @param params Varags, erste Komponente muss Zahl <i>n</i> sein,
-         *               die potenziert werden soll.
+         * @param params  Varags, erste Komponente muss Zahl <i>n</i> sein,
+         *                die potenziert werden soll.
          *
-         * @return String mit Berechnungsergebnis, wird an Methode
-         *         {@link MeinAsyncTask#onPostExecute(String)} übergeben.
+         * @return  String mit Berechnungsergebnis, wird an Methode
+         *          {@link MeinAsyncTask#onPostExecute(String)} übergeben.
          */
         @Override
-        protected String doInBackground(Integer... params) {
+        protected String doInBackground(Integer... params) {            
             long    ergebnis               = 0;
             boolean mitFortschrittsanzeige = true;
 
@@ -197,7 +205,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
         /**
          * Methode wird nach Ende der Berechnung aufgerufen
-         * (also wenn Methode {@link MeinAsyncTask#doInBackground(Integer...)}  }
+         * (also wenn Methode {@link MeinAsyncTask#doInBackground(Integer...)}
          *  beendet ist) und stellt das Berechnungsergebnis auf der UI dar.
          *
          * @param ergebnisString  Berechnungsergebnis, wird auf UI dargestellt.
