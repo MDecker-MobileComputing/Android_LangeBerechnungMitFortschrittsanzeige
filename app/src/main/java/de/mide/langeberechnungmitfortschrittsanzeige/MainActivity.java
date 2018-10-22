@@ -122,7 +122,7 @@ public class MainActivity extends Activity implements OnClickListener {
      * Aufruf der Methode <code>execute</code> gestartet.
      * <br><br>
      *
-     * Generics Parameter:
+     * <b>Generics Parameter:</b>
      * <ol>
      *     <li><code>Integer</code>: 
      *                 Eingabe-Parameter <i>n</i> für Methode <i>doInBackground()</i>,
@@ -137,7 +137,7 @@ public class MainActivity extends Activity implements OnClickListener {
      *     <li><code>String</code>: 
      *                 Als Ergebnis darzustellende Nachricht; wird mit <i>return</i>
      *                 von der Methode <i>doInBackground()</i> zurückgegeben,
-     *                 ist Input-Parameter für die Methode <i>onPostExecute()</i>.</li><br>
+     *                 ist Input-Parameter für die Methode <i>onPostExecute()</i>.</li>
      * </ol>
      */
     public class MeinAsyncTask extends AsyncTask<Integer, Integer, String> {
@@ -186,6 +186,7 @@ public class MainActivity extends Activity implements OnClickListener {
                     "\nLaufzeit: " + laufzeitSekunden + " Sekunden";
         }
 
+
         /**
          * Aktualisiert die Fortschrittsanzeige (Text und ProessBar); wird durch
          * die Methode {@link AsyncTask#publishProgress(Object[])} aufgerufen
@@ -202,6 +203,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
             _textViewAnzeige.setText( prozentwert + "%" );
         }
+
 
         /**
          * Methode wird nach Ende der Berechnung aufgerufen
