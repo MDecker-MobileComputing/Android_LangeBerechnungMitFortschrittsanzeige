@@ -44,6 +44,7 @@ public class MainActivity extends Activity implements OnClickListener {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -153,7 +154,8 @@ public class MainActivity extends Activity implements OnClickListener {
          *          {@link MeinAsyncTask#onPostExecute(String)} übergeben.
          */
         @Override
-        protected String doInBackground(Integer... params) {            
+        protected String doInBackground(Integer... params) {
+
             long    ergebnis               = 0;
             boolean mitFortschrittsanzeige = true;
 
@@ -214,12 +216,13 @@ public class MainActivity extends Activity implements OnClickListener {
          */
         @Override
         protected void onPostExecute(String ergebnisString) {
+
             _textViewAnzeige.setText( ergebnisString );
             _startButton.setEnabled( true );
             _progressBar.setProgress( 100 ); // 100%
         }
 
-    }
+    } // Ende von class MeinAsyncTask
 
     /* **************************** */
     /* *** Ende innere Klassen  *** */
