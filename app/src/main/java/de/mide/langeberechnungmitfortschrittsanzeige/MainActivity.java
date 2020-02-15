@@ -70,6 +70,7 @@ public class MainActivity extends Activity implements OnClickListener {
     public void onClick(View view) {
 
         if (view != _startButton) {
+
             _textViewAnzeige.setText("Interner Fehler.");
             Log.e(TAG4LOGGING, "Event-Handler-Methode wurde von unerwartetem Button-Objekt aufgerufen.");
             return;
@@ -78,6 +79,7 @@ public class MainActivity extends Activity implements OnClickListener {
         // Zuerst wird überprüft, ob zulässige Zahl eingegeben
         String inputString = _editTextInputParameter.getText().toString();
         if (inputString == null || inputString.trim().length() == 0) {
+
             _textViewAnzeige.setText("Bitte Zahl in das Textfeld eingeben!");
             return;
         }
@@ -166,13 +168,17 @@ public class MainActivity extends Activity implements OnClickListener {
             long zeitpunktStart = System.nanoTime();
 
             for (int i1 = 1; i1 <= inputZahl; i1++) {
+
                 for (int i2 = 1; i2 <= inputZahl; i2++) {
+
                     for (int i3 = 1; i3 <= inputZahl; i3++) {
+
                         ergebnis += 1;
                     }
                 }
 
                 if (mitFortschrittsanzeige  &&  i1 % 10 == 9) {
+
                     int prozentWert = (int) (i1 * 100.0 / inputZahl);
                     publishProgress(prozentWert);
                 }
