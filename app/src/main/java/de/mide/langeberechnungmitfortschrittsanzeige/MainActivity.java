@@ -177,7 +177,7 @@ public class MainActivity extends Activity implements OnClickListener {
                     }
                 }
 
-                if (mitFortschrittsanzeige  &&  i1 % 10 == 9) {
+                if (mitFortschrittsanzeige &&  i1 % 10 == 9) {
 
                     int prozentWert = (int) (i1 * 100.0 / inputZahl);
                     publishProgress(prozentWert);
@@ -188,7 +188,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
             long zeitpunktEnde  = System.nanoTime();
             final long laufzeitSekunden = (zeitpunktEnde - zeitpunktStart) /
-                                            ( 1000 * 1000 * 1000 );
+                                          ( 1000 * 1000 * 1000 );
 
             return  "Ergebnis: "   + ergebnis +
                     "\nLaufzeit: " + laufzeitSekunden + " Sekunden";
