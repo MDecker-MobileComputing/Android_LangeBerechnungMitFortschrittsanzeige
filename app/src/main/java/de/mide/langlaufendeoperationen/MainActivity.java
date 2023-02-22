@@ -137,7 +137,7 @@ public class MainActivity extends Activity implements OnClickListener {
      * zu {@link java.lang.Thread} -- nur unter Android zur Verfügung und nicht
      * in "normalem" Java.
      */
-    public class MeinAsyncTask extends AsyncTask<Integer, String, Long> {
+    public class MeinAsyncTask extends AsyncTask<Integer, Integer, Long> {
 
         /**
          * Diese Methode wird NICHT im Main-Thread ausgeführt, sondern in einem
