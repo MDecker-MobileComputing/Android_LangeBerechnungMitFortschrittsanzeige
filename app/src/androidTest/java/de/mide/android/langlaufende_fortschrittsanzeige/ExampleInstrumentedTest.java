@@ -1,4 +1,4 @@
-package de.mide.langlaufendeoperationen;
+package de.mide.android.langlaufende_fortschrittsanzeige;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("de.mide.langlaufendeoperationen", appContext.getPackageName());
+        assertEquals("de.mide.android.langlaufende_fortschrittsanzeige", appContext.getPackageName());
     }
 }

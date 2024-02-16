@@ -1,4 +1,4 @@
-package de.mide.langlaufendeoperationen;
+package de.mide.android.langlaufende_fortschrittsanzeige;
 
 import org.junit.Test;
 
