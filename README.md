@@ -2,7 +2,7 @@
 
 <br>
 
-Android app using class `AsyncTask`, progress bar is to be added as practice.
+Android app using class [AsyncTask](https://developer.android.com/reference/android/os/AsyncTask), progress bar is to be added as exercise.
 
 <br>
 
