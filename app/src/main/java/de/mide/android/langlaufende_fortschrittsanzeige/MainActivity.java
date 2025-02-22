@@ -26,6 +26,7 @@ import android.widget.Toast;
  *
  * This project is licensed under the terms of the BSD 3-Clause License.
  */
+@SuppressWarnings("deprecation")
 public class MainActivity extends Activity implements OnClickListener {
 
     /** Tag für Log-Messages der ganzen App. */
@@ -50,7 +51,7 @@ public class MainActivity extends Activity implements OnClickListener {
      * zugehörigen Member-Variablen.
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState ) {
 
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
@@ -75,30 +76,30 @@ public class MainActivity extends Activity implements OnClickListener {
      * @param view  Button, der das Event ausgelöst hat.
      */
     @Override
-    public void onClick(View view) {
+    public void onClick( View view ) {
 
         /* *** Zuerst wird überprüft, ob zulässige Zahl eingegeben *** */
         String inputString = _editTextInputParameter.getText().toString();
-        if (inputString == null || inputString.trim().length() == 0) {
+        if ( inputString == null || inputString.trim().length() == 0 ) {
 
-            showToast("Bitte Zahl in das Textfeld eingeben!");
+            showToast( "Bitte Zahl in das Textfeld eingeben!" );
             return;
         }
 
-        int inputZahl = Integer.parseInt(inputString);
+        int inputZahl = Integer.parseInt( inputString );
 
-        long erwartetesErgebnis = (long) Math.pow(inputZahl, 3); // "inputZahl hoch 3"
-        Log.d(TAG4LOGGING, "Erwartetes Ergebnis: " + erwartetesErgebnis);
+        long erwartetesErgebnis = (long) Math.pow( inputZahl, 3 ); // "inputZahl hoch 3"
+        Log.d( TAG4LOGGING, "Erwartetes Ergebnis: " + erwartetesErgebnis );
 
 
         /* *** Eigentliche Berechnung durchführen *** */
-        _button.setEnabled(false);
-        _textViewAnzeige.setText("Berechnung für " + inputZahl + " gestartet ...");
+        _button.setEnabled( false );
+        _textViewAnzeige.setText( "Berechnung für " + inputZahl + " gestartet ..." );
 
-        keyboardEinklappen(view);
+        keyboardEinklappen( view );
 
         MeinAsyncTask mat = new MeinAsyncTask();
-        mat.execute(inputZahl);
+        mat.execute( inputZahl );
     }
 
 
@@ -107,9 +108,9 @@ public class MainActivity extends Activity implements OnClickListener {
      *
      * @param nachricht  Text, der mit Toast-Objekt dargestellt werden soll.
      */
-    protected void showToast(String nachricht) {
+    protected void showToast( String nachricht ) {
 
-        Toast.makeText(this, nachricht, Toast.LENGTH_LONG).show();
+        Toast.makeText( this, nachricht, Toast.LENGTH_LONG ).show();
     }
 
 
@@ -120,11 +121,11 @@ public class MainActivity extends Activity implements OnClickListener {
      *
      * @param view  UI-Element, von dem Keyboard eingeblendet wurde.
      */
-    public void keyboardEinklappen(View view) {
+    public void keyboardEinklappen( View view ) {
 
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService( INPUT_METHOD_SERVICE );
 
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow( view.getWindowToken(), 0 );
     }
 
 
@@ -150,17 +151,17 @@ public class MainActivity extends Activity implements OnClickListener {
          *                der Methode <code>execute</code> übergeben.
          */
         @Override
-        protected Long doInBackground(Integer... params) {
+        protected Long doInBackground( Integer... params ) {
 
             int inputParameter = params[0];
 
             long ergebnis = 0;
 
-            for (int i = 0; i < inputParameter; i++){
+            for ( int i = 0; i < inputParameter; i++ ){
 
-                for (int j = 0; j < inputParameter; j++) {
+                for ( int j = 0; j < inputParameter; j++ ) {
 
-                    for (int k = 0; k < inputParameter; k++) {
+                    for ( int k = 0; k < inputParameter; k++ ) {
 
                         ergebnis += 1;
                     }
@@ -178,12 +179,12 @@ public class MainActivity extends Activity implements OnClickListener {
          * @param ergebnis  Ergebnis der Berechnung, das auf der UI dargestellt werden soll.
          */
         @Override
-        protected void onPostExecute(Long ergebnis) {
+        protected void onPostExecute( Long ergebnis ) {
 
             _textViewAnzeige.setText(
                     "Ergebnis in AsyncTask berechnet: " + ergebnis );
 
-            _button.setEnabled(true);
+            _button.setEnabled( true );
         }
 
     };
