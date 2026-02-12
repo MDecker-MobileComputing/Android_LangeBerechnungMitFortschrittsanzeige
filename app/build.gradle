@@ -4,12 +4,14 @@ plugins {
 
 android {
     namespace 'de.mide.android.langlaufende_fortschrittsanzeige'
-    compileSdk 35
+    compileSdk {
+        version = release(36)
+    }
 
     defaultConfig {
         applicationId "de.mide.android.langlaufende_fortschrittsanzeige"
         minSdk 24
-        targetSdk 35
+        targetSdk 36
         versionCode 1
         versionName "1.0"
 
@@ -29,7 +31,6 @@ android {
 }
 
 dependencies {
-
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
